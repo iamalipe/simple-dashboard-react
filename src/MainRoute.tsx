@@ -3,6 +3,10 @@ import PrivateLayout from "@/private-pages/private-layout";
 import HomePage from "@/private-pages/home-page/home-page";
 import UserPage from "@/private-pages/user-page/user-page";
 
+import { QueryClient, QueryClientProvider } from "react-query";
+
+const queryClient = new QueryClient();
+
 const router = createBrowserRouter(
   [
     {
@@ -35,12 +39,14 @@ const MainRoute = () => {
   // NOTE any provider can be added here
   return (
     <>
-      <RouterProvider
-        future={{
-          v7_startTransition: true,
-        }}
-        router={router}
-      />
+      <QueryClientProvider client={queryClient}>
+        <RouterProvider
+          future={{
+            v7_startTransition: true,
+          }}
+          router={router}
+        />
+      </QueryClientProvider>
     </>
   );
 };
